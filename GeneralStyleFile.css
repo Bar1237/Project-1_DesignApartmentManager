@@ -1,0 +1,194 @@
+/*General*/
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: rgb(85, 196, 240);
+}
+
+h1 {
+  text-align: center; 
+  font-size: 32px;
+  font-weight: 550;
+  color: white;
+}
+  
+*:focus {
+  outline: none;
+}
+
+/*Navbar*/
+  
+.navbar {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: #333;
+  margin: auto;
+  width: 50%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+  
+.navbar a {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+  
+.navbar a:hover{
+  background-color:rgb(0, 95, 133);
+}
+
+#logOut {
+  float: right;
+}
+
+/*Boxes*/
+
+#box{
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  border: solid 2px  #cccccc;
+  background: #fff;
+  overflow: hidden;
+  margin: auto;
+  width: 50%;
+  padding: 5px;
+  margin-bottom: 10px;
+  min-height: 500px;
+}
+
+/*Text fields and buttons below boxes.*/
+
+#textBox1 {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  border: solid 2px  #cccccc;
+  background: #fff;
+  overflow: hidden;
+  display: block;
+  margin: auto;
+  width: 30%;
+}
+
+#button1 {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background-color: #333;
+  overflow: hidden;
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 20%;
+}
+
+#button1:hover {
+  background-color:rgb(0, 95, 133);
+}
+
+#dateOutID {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  border: solid 2px  #cccccc;
+  background: #fff;
+  overflow: hidden;
+  display: block;
+  margin: auto;
+  width: 30%;
+  height: 50px;
+  margin-top: 10px;
+}
+
+/*Login button*/
+  
+input[type=submit] {
+  background-color: #56baed;
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+input[type=submit]:hover {
+  background-color: #39ace7;
+}
+
+input[type=submit]:active {
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+/*Username Field*/
+
+input[type=text] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+input[type=text]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #5fbae9;
+}
+
+input[type=text]:placeholder {
+  color: #cccccc;
+}
+
+/*Form Content*/
+  
+.formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;  
+  border: solid 3px  #cccccc;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 10px;
+  text-align: center;
+  width: 800px;
+}

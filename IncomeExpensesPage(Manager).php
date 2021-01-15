@@ -116,7 +116,7 @@
         echo "<td>" . $row["status"]. "</td>";
         echo "<td>" . $row["date"] . "</td>";
         ?>
-        <td><a href="payOthersDebt.php?due_number=<?php echo $row["due_number"]; ?> "><button id="button1" style="width: 60px; height:35px; padding:5px; margin:auto; color:white;">Paid</button></a></td>
+        <td><a href="payOthersDebt.php?due_number=<?php echo $row["due_number"]; ?> "><button id="button1" style="width: 60px; height:35px; padding:5px; margin:auto; color:white;">Pay</button></a></td>
         <?php
         echo "</tr>";
        }

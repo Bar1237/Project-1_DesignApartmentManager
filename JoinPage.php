@@ -37,9 +37,6 @@ if(isset($_POST['submit_button'])){
     $username=test_input($_POST['username']);
     $password=md5(test_input($_POST['password']));
     
-    // Set session variables
-    $_SESSION["c_username"] = "$username";
-    
     //Checking if any of the variables is empty. If there are empty ones then an error message is given to user.
     if((empty($username))or(empty($password))){
         echo '<script language="javascript">';
@@ -54,6 +51,15 @@ if(isset($_POST['submit_button'])){
     $queryResident="SELECT * FROM `users` WHERE userName='$username' AND userPassword='$password' AND isManager='false'";
     $resultResident=mysqli_query($connection,$queryResident);
     $rowsResident=mysqli_num_rows($resultResident);
+
+    //Necesarry values are taken from the database and assigned as session variables.
+    $querySession="SELECT * FROM `users` WHERE userName='$username' AND userPassword='$password'";
+    $resultSession=mysqli_query($connection,$querySession);
+    $result = mysqli_fetch_array($resultSession);
+    $c_fullName = $result["fullName"];
+    $c_userName = $result["userName"];
+    $_SESSION["c_fullname"] = "$c_fullName";
+    $_SESSION["c_username"] = "$c_userName";
 
         if($rowsAdmin==1){
            header("Location: AnnouncementPage(Manager).php");

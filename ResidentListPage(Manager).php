@@ -62,7 +62,7 @@ session_start();
         echo "<td>" . $row["moveInDate"]. "</td>";
         echo "<td>" . $row["moveOutDate"] . "</td>";
         ?>
-        <td><a href="deleteUser.php?userID=<?php echo $row["id"]; ?> "><button id="button1" style="width: 80px; height:55px; padding:5px; margin:auto; color:white;">Moved Out</button></a></td>
+        <td><a href="deleteUser.php?userID=<?php echo $row["id"]; ?> "><button id="button1" style="width: 80px; height:55px; padding:5px; margin:auto; color:white;">Move Out</button></a></td>
         <?php
         echo "</tr>";
         }  

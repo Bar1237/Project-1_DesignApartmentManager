@@ -145,7 +145,7 @@ input[type=submit]:active {
   transform: scale(0.95);
 }
 
-/*Username Field*/
+/*Input Fields*/
 
 input[type=text] {
   background-color: #f6f6f6;

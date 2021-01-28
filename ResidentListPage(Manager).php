@@ -34,7 +34,6 @@ session_start();
     //Table to put the result.
     echo "<table border='1' class='table table-hover'>
     <tr>
-    <th>Username</th>
     <th>Full Name</th>
     <th>Manager</th>
     <th>Door Number</th>
@@ -49,8 +48,7 @@ session_start();
     if (mysqli_num_rows($result) > 0) {
         
         while($row = mysqli_fetch_assoc($result)) {
-        echo "<tr>";   
-        echo "<td>" . $row["userName"]. "</td>";
+        echo "<tr>";
         echo "<td>" . $row["fullName"] . "</td>";
         echo "<td>" . $row["isManager"]. "</td>";
         echo "<td>" . $row["doorNumber"] . "</td>";
@@ -60,6 +58,7 @@ session_start();
         echo "<td>" . $row["gender"] . "</td>";
         echo "<td>" . $row["moveInDate"]. "</td>";
         ?>
+        <td><a href="updateUser.php?userID=<?php echo $row["id"]; ?> "><button id="button1" style="width: 80px; height:55px; padding:5px; margin:auto; color:white;">Update</button></a></td>
         <td><a href="deleteUser.php?userID=<?php echo $row["id"]; ?> "><button id="button1" style="width: 80px; height:55px; padding:5px; margin:auto; color:white;">Move Out</button></a></td>
         <?php
         echo "</tr>";

@@ -50,18 +50,22 @@ if(isset($_POST['submit_button'])){
     $resultResident=mysqli_query($connection,$queryResident);
     $rowsResident=mysqli_num_rows($resultResident);
 
-    //Necesarry values are taken from the database and assigned as session variables.
+    //Necesarry values are taken from the database and assigned as session variables in the if part.
     $querySession="SELECT * FROM `users` WHERE userName='$username' AND userPassword='$password'";
     $resultSession=mysqli_query($connection,$querySession);
     $result = mysqli_fetch_array($resultSession);
-    $c_fullName = $result["fullName"];
-    $c_userName = $result["userName"];
-    $_SESSION["c_fullname"] = "$c_fullName";
-    $_SESSION["c_username"] = "$c_userName";
 
         if($rowsAdmin==1){
+           $c_fullName = $result["fullName"];
+           $c_userName = $result["userName"];
+           $_SESSION["c_fullname"] = "$c_fullName";
+           $_SESSION["c_username"] = "$c_userName";
            header("Location: AnnouncementPage(Manager).php");
         }else if ($rowsResident==1){
+           $c_fullName = $result["fullName"];
+           $c_userName = $result["userName"];
+           $_SESSION["c_fullname"] = "$c_fullName";
+           $_SESSION["c_username"] = "$c_userName"; 
            header("Location: AnnouncementPage(Resident).php");
         }else{
            echo '<script language="javascript">';

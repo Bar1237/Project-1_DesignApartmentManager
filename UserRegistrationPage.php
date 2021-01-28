@@ -100,13 +100,9 @@ if(isset($_POST['register_button'])){
 
     $moveInDate=test_input($_POST['dateIn']);
     
-    //Checking the database if the username is already taken. The else if before the last one gives an error message if the username is already taken.
+    //Checking the database if the username is already taken. The last else if below gives an error message if the username is already taken.
     $sql_u = "SELECT * FROM users WHERE userName='$registerUsername'";
-    $res_u = mysqli_query($connection, $sql_u);
-    
-    //Checking the database if the username is already taken by a move out user. The last else if below gives an error message if the username is already taken.
-    $sql_u_o = "SELECT * FROM move_out_users WHERE userName='$registerUsername'";
-  	$res_u_o = mysqli_query($connection, $sql_u_o);  
+    $res_u = mysqli_query($connection, $sql_u); 
       
     //Checking if any of the variables is empty. If there are empty ones then the data is not stored to database and error message is given to user.
     if((empty($registerUsername))or(empty($registerPassword))or(empty($fullName))or(empty($isManager))or(empty($doorNumber))or(empty($email))or(empty($phoneNumberOne))or(empty($phoneNumberTwo))or(empty($gender))or(empty($moveInDate))){
@@ -137,19 +133,14 @@ if(isset($_POST['register_button'])){
     }else if(mysqli_num_rows($res_u) > 0){
         echo '<script language="javascript">';
         echo 'alert("Username already taken. Please try another one.")';
-        echo '</script>';
-    //If the username is already taken by a user who is moved out then it will warn the user.
-    }else if(mysqli_num_rows($res_u_o) > 0){
-        echo '<script language="javascript">';
-        echo 'alert("Username already taken. Please try another one.")';
-        echo '</script>';    
+        echo '</script>';  
     //If all of the required data is entered, passed the uniqueness test and they are using allowed characters then it is saved to database.
     }else{
     //Password is encrypted before it is inserted into database.       
     $registerPassword=md5(test_input($_POST['passwordRegister']));
 
-    $sqlRegister = "INSERT INTO `users` (userName, userPassword, fullName, isManager, doorNumber, email, phoneNumberOne, phoneNumberTwo, gender, moveInDate)
-    VALUES ('$registerUsername', '$registerPassword', '$fullName', '$isManager', '$doorNumber', '$email', '$phoneNumberOne', '$phoneNumberTwo', '$gender', '$moveInDate')";
+    $sqlRegister = "INSERT INTO `users` (userName, userPassword, fullName, isManager, doorNumber, email, phoneNumberOne, phoneNumberTwo, gender, isActive, moveInDate)
+    VALUES ('$registerUsername', '$registerPassword', '$fullName', '$isManager', '$doorNumber', '$email', '$phoneNumberOne', '$phoneNumberTwo', '$gender', 'true', '$moveInDate')";
     
     if (mysqli_query($connection, $sqlRegister)) {
         echo '<script language="javascript">';

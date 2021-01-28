@@ -23,7 +23,7 @@ session_start();
     <div id="box">
     <?php
     //Selecting all of the moved out user information from table.
-    $sql_o = "SELECT * FROM move_out_users ORDER BY doorNumber ASC";
+    $sql_o = "SELECT * FROM users WHERE isActive='false' ORDER BY doorNumber ASC";
     $result_o = mysqli_query($connection, $sql_o);
     ?>
 

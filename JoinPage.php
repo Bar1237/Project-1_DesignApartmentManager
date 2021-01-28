@@ -42,16 +42,16 @@ if(isset($_POST['submit_button'])){
         echo '</script>';
     //If all the required information is entered then it compares the forum values with the database values.    
     }else{
-    $queryAdmin="SELECT * FROM `users` WHERE userName='$username' AND userPassword='$password' AND isManager='true'";
+    $queryAdmin="SELECT * FROM `users` WHERE userName='$username' AND userPassword='$password' AND isManager='true' AND isActive='true'";
     $resultAdmin=mysqli_query($connection,$queryAdmin);
     $rowsAdmin=mysqli_num_rows($resultAdmin);
 
-    $queryResident="SELECT * FROM `users` WHERE userName='$username' AND userPassword='$password' AND isManager='false'";
+    $queryResident="SELECT * FROM `users` WHERE userName='$username' AND userPassword='$password' AND isManager='false' AND isActive='true'";
     $resultResident=mysqli_query($connection,$queryResident);
     $rowsResident=mysqli_num_rows($resultResident);
 
     //Necesarry values are taken from the database and assigned as session variables in the if part.
-    $querySession="SELECT * FROM `users` WHERE userName='$username' AND userPassword='$password'";
+    $querySession="SELECT * FROM `users` WHERE userName='$username' AND userPassword='$password' AND isActive='true'";
     $resultSession=mysqli_query($connection,$querySession);
     $result = mysqli_fetch_array($resultSession);
 

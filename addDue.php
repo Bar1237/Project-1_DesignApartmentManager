@@ -46,7 +46,7 @@ if(isset($_POST['add_due_button'])){
     //If all of the required data is entered then it is saved to database.
     }else{
     //Selecting all of the user information from table.
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM users WHERE isActive='true'";
     $result = mysqli_query($connection, $sql);
     
     //Using while loop to add due to all usernames and if the username is empty then due is not added.

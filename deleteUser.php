@@ -9,14 +9,10 @@ $moveOutDate= date("Y-m-d");
 $sqlMoveOutDateAdd= "UPDATE users SET moveOutDate = '$moveOutDate' WHERE id='$userID'";
 mysqli_query($connection, $sqlMoveOutDateAdd); 
 
-//User is copied to the move out users table.
-$sqlCopyUser= "INSERT INTO move_out_users SELECT * FROM users WHERE id='$userID'";
-mysqli_query($connection, $sqlCopyUser);
-
-//User is deleted from the original table.        
-$sqlDeleteUser = "DELETE FROM users WHERE id='$userID'";
+//isActive changed to false.
+$sqlChangeIsActive= "UPDATE users SET isActive = 'false' WHERE id='$userID'";
         
-    if (mysqli_query($connection, $sqlDeleteUser)) {
+    if (mysqli_query($connection, $sqlChangeIsActive)) {
         echo '<script language="javascript">';
         echo 'alert("User is deleted.")';
         echo '</script>';

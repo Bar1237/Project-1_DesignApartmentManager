@@ -1,5 +1,6 @@
 <?php
 session_start();
+//Connecting to database.
 include 'databaseConnection.php';
 
 //Taking the current users username.
@@ -72,6 +73,7 @@ if (mysqli_num_rows($result_curr_user) > 0) {
     </div>
 </body>
 </html>
+
 <?php
 //If the form is set then the each data taken from the form are taken to the test_input function and then assigned to the variables.
 if(isset($_POST['update_button'])){

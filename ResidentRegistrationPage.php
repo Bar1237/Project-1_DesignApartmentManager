@@ -111,8 +111,8 @@ if(isset($_POST['register_button'])){
     //If all of the required data is entered and they are using allowed characters then it is saved to database.
     }else{
 
-    $sqlRegister = "INSERT INTO `users` (userName, userPassword, fullName, isManager, doorNumber, email, phoneNumberOne, phoneNumberTwo, gender, moveInDate)
-    VALUES ('', '', '$fullName', '', '$doorNumber', '$email', '$phoneNumberOne', '$phoneNumberTwo', '$gender', '$moveInDate')";
+    $sqlRegister = "INSERT INTO `users` (userName, userPassword, fullName, isManager, doorNumber, email, phoneNumberOne, phoneNumberTwo, gender, isActive, moveInDate)
+    VALUES ('', '', '$fullName', '', '$doorNumber', '$email', '$phoneNumberOne', '$phoneNumberTwo', '$gender', 'true', '$moveInDate')";
     
     if (mysqli_query($connection, $sqlRegister)) {
         echo '<script language="javascript">';

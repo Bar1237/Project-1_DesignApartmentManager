@@ -23,7 +23,7 @@ session_start();
     <div id="box">
     <?php
     //Selecting all of the user information from table.
-    $sql = "SELECT * FROM users ORDER BY doorNumber ASC";
+    $sql = "SELECT * FROM users WHERE isActive='true' ORDER BY doorNumber ASC";
     $result = mysqli_query($connection, $sql);
 
     ?>

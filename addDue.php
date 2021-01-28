@@ -54,10 +54,11 @@ if(isset($_POST['add_due_button'])){
     
       while($row = mysqli_fetch_assoc($result)) {
       $tempUserName= $row["userName"];
+      $tempUserId= $row["id"];
     
         if(!(empty($tempUserName))){
-          $sqlAddDue = "INSERT INTO `dues_table` (amount, status, date, owner)
-          VALUES ('$amount', 'not paid', '$date', '$tempUserName')";
+          $sqlAddDue = "INSERT INTO `dues_table` (owner_id, amount, status, date, owner)
+          VALUES ('$tempUserId', '$amount', 'not paid', '$date', '$tempUserName')";
           mysqli_query($connection, $sqlAddDue);
         } 
       }

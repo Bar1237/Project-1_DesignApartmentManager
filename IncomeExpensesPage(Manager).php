@@ -108,6 +108,18 @@ session_start();
     </div>
 
     <?php
+    //Selecting the ones who paid their dues with date.
+    $sql_income_date = "SELECT * FROM dues_table WHERE status='paid' AND date BETWEEN '$startingDate' AND '$endingDate' ORDER BY date DESC";
+    $result_income_date = mysqli_query($connection, $sql_income_date);
+
+    //Selecting the ones who did not paid their dues with date.
+    $sql_debt_date = "SELECT * FROM dues_table WHERE status='not paid' AND date BETWEEN '$startingDate' AND '$endingDate' ORDER BY date DESC";
+    $result_debt_date = mysqli_query($connection, $sql_debt_date);
+
+    //Selecting expense information from table with date.
+    $sql_expense_date = "SELECT * FROM expenses_table WHERE date BETWEEN '$startingDate' AND '$endingDate' ORDER BY date DESC";
+    $result_expenses_date = mysqli_query($connection, $sql_expense_date);
+
     //Selecting the ones who paid their dues.
     $sql_income = "SELECT * FROM dues_table WHERE status='paid' ORDER BY date DESC";
     $result_income = mysqli_query($connection, $sql_income);
@@ -120,6 +132,101 @@ session_start();
     $sql_expense = "SELECT * FROM expenses_table ORDER BY date DESC";
     $result_expenses = mysqli_query($connection, $sql_expense);
     ?>
+    <div class="container">
+    <button type="button" class="btn btn-info" id="button1" style="width: 50%; height: 65px; display:inline-block; margin-left:165px;;" data-toggle="collapse" data-target="#incomeListDate">Selected Income Table</button>
+    <div id="incomeListDate" class="collapse" style="max-width:900px;">
+    <?php
+    
+    //Table to put the income result.
+    echo "<table border='1' class='table table-hover'>
+    <tr>
+    <th>Owner</th>
+    <th>Amount</th>
+    <th>Status</th>
+    <th>Date</th>
+    </tr>";
+    
+    //Writing the income values.
+    if (mysqli_num_rows($result_income_date) > 0) {
+
+       while($row = mysqli_fetch_assoc($result_income_date)) {
+        echo "<tr>";   
+        echo "<td>" . $row["owner"]. "</td>";
+        echo "<td>" . $row["amount"] . "</td>";
+        echo "<td>" . $row["status"]. "</td>";
+        echo "<td>" . $row["date"] . "</td>";
+        echo "</tr>";
+       }
+    }
+    echo "</table>";
+
+    ?>
+    </div>
+    </div>
+    
+    <div class="container">
+    <button type="button" class="btn btn-info" id="button1" style="width: 50%; height: 65px; display:inline-block; margin-left:165px;;" data-toggle="collapse" data-target="#expenseListDate">Selected Expense Table</button>
+    <div id="expenseListDate" class="collapse" style="max-width:900px;">
+    <?php
+    
+    //Table to put the expense result.
+    echo "<table border='1' class='table table-hover'>
+    <tr>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Date</th>
+    </tr>";
+    
+    //Writing the expense values.
+    if (mysqli_num_rows($result_expenses_date) > 0) {
+
+       while($row = mysqli_fetch_assoc($result_expenses_date)) {
+        echo "<tr>";   
+        echo "<td>" . $row["description"]. "</td>";
+        echo "<td>" . $row["amount"] . "</td>";
+        echo "<td>" . $row["date"] . "</td>";
+        echo "</tr>";
+       }
+    }
+    echo "</table>";
+    ?>
+    </div>
+    </div>
+   
+   <div class="container">
+   <button type="button" class="btn btn-info" id="button1" style="width: 50%; height: 65px; display:inline-block; margin-left:165px;;" data-toggle="collapse" data-target="#dueListDate">Selected Due Table</button>
+   <div id="dueListDate" class="collapse" style="max-width:900px;">
+   <?php
+
+    //Table to put the all debt result.
+    echo "<table border='1' class='table table-hover'>
+    <tr>
+    <th>Owner</th>
+    <th>Amount</th>
+    <th>Status</th>
+    <th>Date</th>
+    </tr>";
+    
+    //Writing the all debt values.
+    if (mysqli_num_rows($result_debt_date) > 0) {
+
+       while($row = mysqli_fetch_assoc($result_debt_date)) {
+        echo "<tr>";   
+        echo "<td>" . $row["owner"]. "</td>";
+        echo "<td>" . $row["amount"] . "</td>";
+        echo "<td>" . $row["status"]. "</td>";
+        echo "<td>" . $row["date"] . "</td>";
+        ?>
+        <td><a href="payOthersDebt.php?due_number=<?php echo $row["due_number"]; ?> "><button id="button1" style="width: 60px; height:35px; padding:5px; margin:auto; color:white;">Pay</button></a></td>
+        <?php
+        echo "</tr>";
+       }
+    }
+    echo "</table>";
+    ?>
+    </div>
+    </div>
+
     <div class="container">
     <button type="button" class="btn btn-info" id="button1" style="width: 50%; height: 65px; display:inline-block; margin-left:165px;;" data-toggle="collapse" data-target="#incomeList">Income Table</button>
     <div id="incomeList" class="collapse" style="max-width:900px;">

@@ -20,6 +20,93 @@ session_start();
     <?php include 'navbarResident.php';?>
     <div id="box">
     <?php
+    //Getting the start date.
+    if (isset($_POST['startingDate'])) {
+      $startingDate = $_POST['startingDate'];
+    }else{
+      $startingDate = date("Y-m-d", mktime(0, 0, 0, date("m") - 1, 1));
+    }
+    //Getting the end date.
+    if (isset($_POST['endingDate'])) {
+      $endingDate = $_POST['endingDate'];
+    }else{
+      $endingDate = date("Y-m-d", mktime(0, 0, 0, date("m"), 0));
+    }
+    //Selecting the sum of the paid dues between start and end date.
+    $query = "SELECT SUM(amount) FROM dues_table WHERE status = 'paid' AND date BETWEEN '$startingDate' AND '$endingDate'";
+    $result = mysqli_query($connection, $query);
+    $row = mysqli_fetch_assoc($result);
+    if($row['SUM(amount)'] > 0){
+      $income = $row['SUM(amount)'];
+    }else{
+      $income=0;
+    }
+    //Selecting the sum of the not paid dues between start and end date.
+    $query = "SELECT SUM(amount) FROM dues_table WHERE status = 'not paid' AND date BETWEEN '$startingDate' AND '$endingDate'";
+    $result = mysqli_query($connection, $query);
+    $row = mysqli_fetch_assoc($result);
+    if($row['SUM(amount)'] > 0){
+      $unpaiddues = $row['SUM(amount)'];
+    }else{
+      $unpaiddues=0;
+    }
+    //Selecting the sum of the expenses between start and end date.
+    $query = "SELECT SUM(amount) FROM expenses_table WHERE date BETWEEN '$startingDate' AND '$endingDate'";
+    $result = mysqli_query($connection, $query);
+    $row = mysqli_fetch_assoc($result);
+    if($row['SUM(amount)'] > 0){
+      $expense = $row['SUM(amount)'];
+    }else{
+      $expense=0;
+    }
+    //Adjusting the chart with the selected values.
+    echo "<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+    
+    <script type='text/javascript'>
+    // Load google charts
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    
+    // Draw the chart and set the chart values
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['Due Income'," . $income . "],
+      ['Expenses'," . $expense . "],
+      ['Unpaid Dues'," . $unpaiddues . "]
+    ]);
+    
+      // Optional; add a title and set the width and height of the chart
+      var options = {'title':'Income/Expense Chart', 'width':850, 'height':400};
+    
+      // Display the chart inside the <div> element with id='piechart'
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+    }
+    </script>";
+    ?>
+
+    <div class="container">
+    <button type="button" class="btn btn-info" id="button1" style="width: 50%; height: 65px; display:inline-block; margin-left:165px;;" data-toggle="collapse" data-target="#chart">Chart</button>
+    <div id="chart" class="collapse" style="max-width:900px;">
+    <!-- Writing the chart. -->
+    <div id='piechart'></div>
+    <!-- Getting start and end date from the user. -->
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+
+      <label for="startingDate">Starting Date:</label>
+      <input type="date" id="startingDate" name="startingDate" class="form-control" value="<?php echo $startingDate; ?>">
+        
+      <label for="endingDate">Ending Date:</label>
+      <input type="date" id="endingDate" name="endingDate" class="form-control" value="<?php echo $endingDate; ?>">
+        
+      <input type="submit" id="button1" value=Show style="width:200px;">
+      
+    </form>
+    </div>
+    </div>
+
+    <?php
     //Selecting the ones who paid their dues.
     $sql_income = "SELECT * FROM dues_table WHERE status='paid' ORDER BY date DESC";
     $result_income = mysqli_query($connection, $sql_income);
